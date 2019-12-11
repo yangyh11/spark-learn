@@ -4,9 +4,9 @@ import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.SparkSession
 
 /**
- * takeOrdered,takeSample
+ * takeSample
  */
-object Demo05Take {
+object Demo05TakeSample {
 
   def main(args: Array[String]): Unit = {
 
@@ -14,12 +14,6 @@ object Demo05Take {
     val sc = session.sparkContext
 
     val rdd: RDD[String] = sc.parallelize(List[String]("a", "b", "c", "d", "e", "f"))
-
-    /**
-     * takeOrdered：对RDD中元素进行升序排列（字典序），获取前n个元素
-     */
-    val takeOrderedResult = rdd.takeOrdered(2)
-    takeOrderedResult.foreach(println)
 
     /**
      * takeSample：从RDD数据集中随机获取几个
