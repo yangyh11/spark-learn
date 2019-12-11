@@ -7,7 +7,7 @@ import org.apache.spark.{SparkConf, SparkContext}
  * 算子练习
  * 思考：一千万条数据量的文件，过滤掉出现次数最多的记录，并且其余记录按照出现次数降序排序。
  */
-object Demo05Practice {
+object Demo01Sample {
 
   def main(args: Array[String]): Unit = {
     val conf = new SparkConf()
@@ -26,9 +26,6 @@ object Demo05Practice {
     // 简化版
     val filterWord = countAndSortDesc(words.sample(true, 0.4)).first()._1
     countAndSortDesc(words.filter(!filterWord.equals(_))).foreach(println)
-
-
-
 
     //    // 抽样
     //    val sampleResult = words.sample(true, 0.5)
