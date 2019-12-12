@@ -18,13 +18,18 @@ object Demo02PvAndUv {
      * pv:即页面浏览量或点击量
      * 66.25.48.99	甘肃	2019-12-11	1576065469303	335845592107020436	www.jd.com	Click
      */
-    lines.map(_.split("\\s")).map(elem => (elem(5), 1)).reduceByKey(_ + _).foreach(println)
+    lines.map(line => Tuple2(line.split("\t")(5), 1)).reduceByKey(_ + _).foreach(println)
 
     /**
      * uv:即独立访客数
      * 66.25.48.99	甘肃	2019-12-11	1576065469303	335845592107020436	www.jd.com	Click
      */
-    lines.map(_.split("\\s")).map(elem => (elem(5), elem(0))).distinct().countByKey().foreach(println)
+    lines.map(line => {
+      val words = line.split("\t")
+      Tuple2(words(5), words(0))
+    }).distinct()
+      .countByKey()
+      .foreach(println)
 
   }
 
