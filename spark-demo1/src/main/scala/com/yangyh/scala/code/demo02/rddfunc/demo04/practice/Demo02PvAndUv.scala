@@ -28,7 +28,9 @@ object Demo02PvAndUv {
       val words = line.split("\t")
       Tuple2(words(5), words(0))
     }).distinct()
-      .countByKey()
+      .mapValues(_ => 1)
+      .reduceByKey(_ + _)
+      .sortBy(_._2,false)
       .foreach(println)
 
   }
