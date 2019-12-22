@@ -24,11 +24,22 @@ object Demo04ReduceByKeyAndWindow {
 
     val pairWords: DStream[(String, Int)] = lines.flatMap(_.split(" ")).map((_, 1))
 
+    /** 普通机制 */
     val result: DStream[(String, Int)] = pairWords.reduceByKeyAndWindow((v1: Int, v2: Int) => {
       v1 + v2
     }, Durations.seconds(15), Durations.seconds(5))
 
     result.print()
+
+    /** 优化机制 */
+    ssc.checkpoint("./data/streamingCheckpoint")
+    val windowResult: DStream[(String, Int)] = pairWords.reduceByKeyAndWindow(
+      (v1:Int, v2:Int)=>{v1+v2},
+      (v1:Int, v2:Int)=>{v1-v2},
+      Durations.seconds(15),
+      Durations.seconds(5))
+    windowResult.print()
+
 
     ssc.start()
     ssc.awaitTermination()
