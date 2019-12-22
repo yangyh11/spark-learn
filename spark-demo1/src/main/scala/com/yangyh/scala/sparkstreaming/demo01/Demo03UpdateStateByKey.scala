@@ -32,6 +32,7 @@ object Demo03UpdateStateByKey {
 
     ssc.start()
     ssc.awaitTermination()
+    ssc.stop()
 
   }
 

@@ -43,6 +43,7 @@ object Demo04ReduceByKeyAndWindow {
 
     ssc.start()
     ssc.awaitTermination()
+    ssc.stop()
   }
 
 }
