@@ -28,6 +28,7 @@ object Demo01TopN {
 
     val rdd2: RDD[(String, Iterable[Int])] = rdd1.groupByKey()
 
+    // 定长数组
     rdd2.foreach(tp => {
       val className = tp._1
       val iterator: Iterator[Int] = tp._2.iterator
